@@ -1,0 +1,34 @@
+complete <- function(directory, id = 1:332) {
+	
+	#colnames(values, do.NULL = FALSE)
+	
+	## loop through the id vector
+	for(i in id) {
+		## concatenate to achieve appropriate filenames
+		prefix <- ""
+		if(i < 100) {
+			prefix<- "0"
+		}
+		if(i < 10) {
+			prefix<-"00"
+		}
+		filename <- paste(directory,"/",prefix,toString(i[1]),".csv", sep="")
+		## read single monitor data
+		monitordata <- read.csv(filename)
+		goodnumber<-nrow(na.omit(monitordata))
+		idvalue <- c(i,goodnumber)
+		#print(idvalue)
+	
+		if(exists("valu")){
+			print(i)
+			rbind(valu,idvalue)
+		}
+		else {
+			valu<-matrix(ncol=2)
+			valu[1,] <- idvalue
+		}
+	}
+	#print(values)
+	colnames(valu) <- c("id","nobs")
+	return(valu)
+}
