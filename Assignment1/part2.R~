@@ -20,11 +20,13 @@ complete <- function(directory, id = 1:332) {
 		#print(idvalue)
 	
 		if(exists("valu")){
-			print(i)
+			print("Exists")
 			rbind(valu,idvalue)
 		}
 		else {
+			print("not exists")
 			valu<-matrix(ncol=2)
+			print(idvalue)
 			valu[1,] <- idvalue
 		}
 	}
