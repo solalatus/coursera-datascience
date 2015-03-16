@@ -1,8 +1,5 @@
 pollutantmean <- function(directory, pollutant, id = 1:332) {
-
-	## Initialize vector for storing datapoints
-	## data <- vector(mode="numeric", length=0)
-	## loop through id-s, open and get data
+	## loop through the id vector
 	for(i in id) {
 		## concatenate to achieve appropriate filenames
 		prefix <- ""
