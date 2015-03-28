@@ -72,5 +72,5 @@ rankall <- function(outcome, num = "best"){
     }
   }
   rownames(names)<-names[,2]
-  return(names)
+  return(as.data.frame(names))
 }
