@@ -1,7 +1,4 @@
-#install.packages("cwhmisc")
-# library(cwhmisc)
 library(stringi)
-library(data.table)
 
 feature_filename <- "~/course-work/C3_Assigment/UCI HAR Dataset/features.txt"
 test_data_filename <-"~/course-work/C3_Assigment/UCI HAR Dataset/test/X_test.txt"
@@ -29,19 +26,15 @@ processed_features_names <- vector(mode="character", length=0)
 for (feat in 1:nrow(feature_names)) {
   good <- TRUE
   good <- stri_detect_fixed(toString(feature_names[feat,2]),"mean(")
-  #good <- grepl("mean",toString(feature_names[feat,2]), fixed=T)
-  #good <- cpos(toString(feature_names[feat,2]),"mean()")
+  
 
   if (good==F) {
     good <- stri_detect_fixed(toString(feature_names[feat,2]),"std(")
-    #good <- grepl("std",toString(feature_names[feat,2]), fixed=T)
-    #good <- cpos(toString(feature_names[feat,2]),"std()")
+  
   }
   
   if (good==T) {
     processed_features_mask <- c(processed_features_mask, "numeric")
-    #print(toString(feature_names[feat,2]))
-    #print(feat)
     processed_features_names <- c(processed_features_names, toString(feature_names[feat,2]))
   }
   else {
@@ -77,12 +70,6 @@ data$Subject_id <- subject_ids[,1]
 # have to iterate through again to format results into table :-(((
 # deadline is in an hour :-((
 
-# print(means_data)
-#str(means_data)
-#tab <-data.table(data)
-#a<-tab[,Mean:=mean(data$),by=list(data$Labeling,data$Subject_id)]
-#write.table(a,"~a.txt")
-
 # very ugly, but works. :-(
 result<-data.frame()
 for (sub in unique(data$Subject_id)) {
@@ -94,6 +81,6 @@ for (sub in unique(data$Subject_id)) {
     
 }
 names(result)<-c("Feature / Mean","Label","Subject_id")
-#print(head(result))
-write.table(result,"~/result.txt")
+
+write.table(result,"result.txt")
 print("Done")
